@@ -23,13 +23,13 @@ func TestGetCommits(t *testing.T) {
 	assert.Equal(t, 200, w.Code)
 }
 
-func TestGetCommitsByRepo(t *testing.T) {
+func TestGetCommitsWithRepo(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 
 	router := api.SetupRouter()
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/commits/testrepo?username=testuser", nil)
+	req, _ := http.NewRequest("GET", "/commits?username=testuser&repo=testrepo", nil)
 	router.ServeHTTP(w, req)
 
 	assert.Equal(t, 200, w.Code)

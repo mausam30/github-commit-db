@@ -11,7 +11,6 @@ func SetupRouter() *gin.Engine {
 	router.Use(github.RateLimiter())
 
 	router.GET("/commits", GetCommits)
-	router.GET("/commits/:repo", GetCommitsByRepo)
 
 	return router
 }
