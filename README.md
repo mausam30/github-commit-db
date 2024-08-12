@@ -31,43 +31,57 @@ GitHub Commit Viewer is a web application that allows users to fetch and view co
   - Integration with GitHub API to fetch commits
 
 ## Project Structure
-# Project Structure
 
-- **project-root**
+<details>
+  <summary>project-root</summary>
+
   - **frontend**
-    - **public**
-    - **src**
-      - **components**
-        - `CommitItem.jsx`
-        - `CommitList.jsx`
-        - `NavBar.jsx`
-      - `App.js`
-      - `index.js`
-      - `app.css`
-      - `index.css`
-    - `package.json`
+    <details>
+      <summary>frontend</summary>
+      - **public**
+      - **src**
+        <details>
+          <summary>src</summary>
+          - **components**
+            - `CommitItem.jsx`
+            - `CommitList.jsx`
+            - `NavBar.jsx`
+          - `App.js`
+          - `index.js`
+          - `app.css`
+          - `index.css`
+        </details>
+      - `package.json`
+    </details>
   - **backend**
-    - **cmd**
-      - `main.go`
-    - **pkg**
-      - **api**
-        - `commits.go`
-        - `router.go`
-      - **github**
-        - `client.go`
-        - `commits.go`
-        - `rate_limit.go`
-      - **middleware**
-        - `auth.go`
-      - **utils**
-        - `config.go`
-        - `errors.go`
-    - **test**
-      - `api_test.go`
-    - `go.mod`
-    - `go.sum`
-    - `.env`
+    <details>
+      <summary>backend</summary>
+      - **cmd**
+        - `main.go`
+      - **pkg**
+        <details>
+          <summary>pkg</summary>
+          - **api**
+            - `commits.go`
+            - `router.go`
+          - **github**
+            - `client.go`
+            - `commits.go`
+            - `rate_limit.go`
+          - **middleware**
+            - `auth.go`
+          - **utils**
+            - `config.go`
+            - `errors.go`
+        </details>
+      - **test**
+        - `api_test.go`
+      - `go.mod`
+      - `go.sum`
+      - `.env`
+    </details>
   - `README.md`
+</details>
 
 
 
