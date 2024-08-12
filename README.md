@@ -12,7 +12,7 @@ GitHub Commit Viewer is a web application that allows users to fetch and view co
 - [Testing](#testing)
 - [Future Improvements](#future-improvements)
 - [Contributing](#contributing)
-- [License](#license)
+
 
 ## Features
 - **Fetch Commits**: Users can enter their GitHub username and repository name to fetch the list of commits.
@@ -158,8 +158,3 @@ If you would like to contribute to this project, please follow these steps:
     git push origin feature-branch
     ```
 5. **Create a pull request** on GitHub.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
