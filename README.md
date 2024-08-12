@@ -1,6 +1,6 @@
 # GitHub Commit Viewer
 
-GitHub Commit Viewer is a web application that allows users to fetch and view commits from a specified GitHub repository. Users can enter their GitHub username and an optional repository name to retrieve the commits they've made.
+GitHub Commit Viewer is a web application that allows users to fetch and view commits from Github Repositories or a specified GitHub repository. Users can enter their GitHub username and an optional repository name to retrieve the commits they've made.
 
 ## Table of Contents
 - [Features](#features)
