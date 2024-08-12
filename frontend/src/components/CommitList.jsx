@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import axios from 'axios';
 import CommitItem from './CommitItem';
 
-const CommitList = () => {
+const CommitList = forwardRef((props, ref) => {
   const [username, setUsername] = useState('');
   const [repo, setRepo] = useState('');
   const [commits, setCommits] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+
+  useImperativeHandle(ref, () => ({
+    resetCommits() {
+      setUsername('');
+      setRepo('');
+      setCommits([]);
+      setPage(1);
+      setHasMore(true);
+    },
+  }));
 
   const fetchCommits = async (reset = false) => {
     if (reset) {
@@ -25,9 +35,9 @@ const CommitList = () => {
       });
 
       const newCommits = response.data;
-      setCommits(prevCommits => (reset ? newCommits : [...prevCommits, ...newCommits]));
+      setCommits((prevCommits) => (reset ? newCommits : [...prevCommits, ...newCommits]));
       setHasMore(newCommits.length > 0);
-      setPage(prevPage => prevPage + 1);
+      setPage((prevPage) => prevPage + 1);
     } catch (error) {
       console.error(error);
       setHasMore(false);
@@ -73,6 +83,6 @@ const CommitList = () => {
       {loading && <div>Loading...</div>}
     </div>
   );
-};
+});
 
 export default CommitList;
