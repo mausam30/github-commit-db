@@ -1,46 +1,25 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import CommitItem from './CommitItem';
 
-const CommitList = forwardRef((props, ref) => {
+const CommitList = () => {
   const [username, setUsername] = useState('');
   const [repo, setRepo] = useState('');
   const [commits, setCommits] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
 
-  useImperativeHandle(ref, () => ({
-    resetCommits() {
-      setUsername('');
-      setRepo('');
-      setCommits([]);
-      setPage(1);
-      setHasMore(true);
-    },
-  }));
-
-  const fetchCommits = async (reset = false) => {
-    if (reset) {
-      setPage(1);
-      setCommits([]);
-    }
-
+  const fetchCommits = async () => {
     setLoading(true);
 
     try {
       const response = await axios.get('/commits', {
-        params: { username, repo, page },
+        params: { username, repo },
         headers: { Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}` },
       });
 
-      const newCommits = response.data;
-      setCommits((prevCommits) => (reset ? newCommits : [...prevCommits, ...newCommits]));
-      setHasMore(newCommits.length > 0);
-      setPage((prevPage) => prevPage + 1);
+      setCommits(response.data);
     } catch (error) {
       console.error(error);
-      setHasMore(false);
     } finally {
       setLoading(false);
     }
@@ -48,18 +27,12 @@ const CommitList = forwardRef((props, ref) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetchCommits(true);
-  };
-
-  const handleScroll = (event) => {
-    if (!loading && hasMore && event.target.scrollHeight - event.target.scrollTop === event.target.clientHeight) {
-      fetchCommits();
-    }
+    fetchCommits();
   };
 
   return (
-    <div className="commit-list" onScroll={handleScroll} style={{ height: '80vh', overflowY: 'scroll' }}>
-      <form onSubmit={handleSubmit}>
+    <div className="commit-list-container">
+      <form onSubmit={handleSubmit} className="commit-list-form">
         <input
           type="text"
           placeholder="GitHub Username"
@@ -77,12 +50,13 @@ const CommitList = forwardRef((props, ref) => {
           {loading ? 'Loading...' : 'Fetch Commits'}
         </button>
       </form>
-      {commits.map((commit) => (
-        <CommitItem key={commit.sha} commit={commit} />
-      ))}
-      {loading && <div>Loading...</div>}
+      <div className="commit-list">
+        {commits.map((commit) => (
+          <CommitItem key={commit.sha} commit={commit} />
+        ))}
+      </div>
     </div>
   );
-});
+};
 
 export default CommitList;
